@@ -1,24 +1,35 @@
+import MovieList from "../../components/MovieList/MovieList";
 import { useState } from "react";
-import fetchMovies from "../../services/fetchMovies";
+import { fetchMovies } from "../../services/api";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import Loader from "../../components/Loader/Loader";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
 const HomePage = () => {
   const [movies, setMovies] = useState([]);
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    fetchMovies().then((data) => setMovies(data), []);
-  });
+    const getData = async () => {
+      setIsLoading(true);
+      try {
+        const res = await fetchMovies();
+        setMovies(res);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    getData();
+  }, []);
   return (
     <div>
-      <h3>Trending today</h3>
-      <ul>
-        {movies.map((movie) => (
-          <li key={movie.id}>
-            <Link to={`/movies/${movie.id}`}>{movie.title}</Link>
-          </li>
-        ))}
-      </ul>
+      <h2>Trending today</h2>
+      {isLoading && <Loader />}
+      {error && <ErrorMessage />}
+      <MovieList movies={movies} />
     </div>
   );
 };
