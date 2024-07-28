@@ -3,6 +3,7 @@ import { fetchMovieDetails } from "../../services/api";
 import { NavLink, useParams } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+// import MovieCast from "../../components/MovieCast/MovieCast";
 
 const MovieDetailsPage = () => {
   const [movie, setMovie] = useState(null);
@@ -54,8 +55,10 @@ const MovieDetailsPage = () => {
 
       <div>
         <h4>Additional information</h4>
-        <NavLink to={cast}>Cast</NavLink>
-        <Navlink to={reviews}>Reviews</Navlink>
+        <div>
+          <NavLink to="cast">Cast</NavLink>
+          <NavLink to="reviews">Reviews</NavLink>
+        </div>
       </div>
     </div>
   );
