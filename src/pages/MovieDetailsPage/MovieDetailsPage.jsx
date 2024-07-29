@@ -1,15 +1,22 @@
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { fetchMovieDetails } from "../../services/api";
-import { NavLink, useParams } from "react-router-dom";
+import {
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useParams,
+} from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
-// import MovieCast from "../../components/MovieCast/MovieCast";
 
 const MovieDetailsPage = () => {
   const [movie, setMovie] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const params = useParams();
+  const location = useLocation();
+  const goBackRef = useRef(location?.state || "/movies");
 
   useEffect(() => {
     const getData = async () => {
@@ -27,19 +34,25 @@ const MovieDetailsPage = () => {
   }, [params.movieId]);
 
   if (!movie) {
-    return (
-      <div>
-        <Loader />
-      </div>
-    );
+    return <Loader />;
   }
+
+  const defaultImg =
+    "https://dl-media.viber.com/10/share/2/long/vibes/icon/image/0x0/95e0/5688fdffb84ff8bed4240bcf3ec5ac81ce591d9fa9558a3a968c630eaba195e0.jpg";
 
   return (
     <div>
       {isLoading && <Loader />}
-      {error && ErrorMessage}
+      {error && <ErrorMessage />}
+      <div>
+        <Link to={goBackRef.current}>Go Back</Link>
+      </div>
       <img
-        src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+        src={
+          movie.poster_path
+            ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+            : defaultImg
+        }
         alt={movie.title}
       />
       <h2>{movie.title}</h2>
@@ -60,6 +73,9 @@ const MovieDetailsPage = () => {
           <NavLink to="reviews">Reviews</NavLink>
         </div>
       </div>
+      <Suspense fallback={<h3>Waiting...</h3>}>
+        <Outlet />
+      </Suspense>
     </div>
   );
 };

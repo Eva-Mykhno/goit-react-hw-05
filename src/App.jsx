@@ -10,6 +10,7 @@ const MovieCast = lazy(() => import("./components/MovieCast/MovieCast"));
 const MovieReviews = lazy(() =>
   import("./components/MovieReviews/MovieReviews")
 );
+const MoviesPage = lazy(() => import("./pages/MoviesPage/MoviesPage"));
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
       <Suspense fallback={<h3>Waiting...</h3>}>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/movies" element={<MoviesPage />} />
           <Route path="/movies/:movieId" element={<MovieDetailsPage />} />
           <Route path="/movies/:movieId/cast" element={<MovieCast />} />
           <Route path="/movies/:movieId/reviews" element={<MovieReviews />} />
