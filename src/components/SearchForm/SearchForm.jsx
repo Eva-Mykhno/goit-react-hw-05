@@ -1,11 +1,8 @@
-import { useState } from "react";
-
 const SearchForm = ({ onSubmit, searchValue }) => {
-  const [inputValue, setInputValue] = useState(searchValue);
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(inputValue);
+    const { value } = e.target.elements.search;
+    onSubmit(value);
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -13,8 +10,8 @@ const SearchForm = ({ onSubmit, searchValue }) => {
         type="search"
         name="search"
         placeholder="Search movie..."
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.elements.search)}
+        value={searchValue}
+        onChange={(e) => onSubmit(e.target.value)}
       />
       <button type="submit">Search</button>
     </form>

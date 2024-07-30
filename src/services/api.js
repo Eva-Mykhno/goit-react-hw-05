@@ -68,7 +68,7 @@ export const fetchMovieReviews = async (movie_id) => {
 };
 
 export const fetchSearchMovie = async (searchValue) => {
-  const url = "url 'https://api.themoviedb.org/3/search/movie";
+  const url = "https://api.themoviedb.org/3/search/movie";
 
   const options = {
     headers: {

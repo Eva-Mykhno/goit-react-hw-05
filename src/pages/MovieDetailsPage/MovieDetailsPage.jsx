@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { fetchMovieDetails } from "../../services/api";
 import {
   Link,
@@ -16,7 +16,8 @@ const MovieDetailsPage = () => {
   const [error, setError] = useState(null);
   const params = useParams();
   const location = useLocation();
-  const goBackRef = useRef(location?.state || "/movies");
+
+  const goBackLink = location?.state?.from ?? "/movies";
 
   useEffect(() => {
     const getData = async () => {
@@ -45,7 +46,7 @@ const MovieDetailsPage = () => {
       {isLoading && <Loader />}
       {error && <ErrorMessage />}
       <div>
-        <Link to={goBackRef.current}>Go Back</Link>
+        <Link to={goBackLink}>Go Back</Link>
       </div>
       <img
         src={
