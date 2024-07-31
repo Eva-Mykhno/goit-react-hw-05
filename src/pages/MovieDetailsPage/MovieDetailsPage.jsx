@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { fetchMovieDetails } from "../../services/api";
 import { NavLink, Outlet, useLocation, useParams } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
@@ -14,7 +14,7 @@ const MovieDetailsPage = () => {
   const params = useParams();
   const location = useLocation();
 
-  const goBackLink = location?.state?.from ?? "/movies";
+  const goBackLink = useRef(location.state?.from ?? "/movies");
 
   useEffect(() => {
     const getData = async () => {
@@ -44,7 +44,7 @@ const MovieDetailsPage = () => {
       {error && <ErrorMessage />}
       <div className={s.goBack}>
         <FaArrowLeftLong />
-        <NavLink className={s.button} to={goBackLink}>
+        <NavLink className={s.button} to={goBackLink.current}>
           Go Back
         </NavLink>
       </div>
