@@ -16,12 +16,11 @@ const MoviesPage = () => {
   const searchValue = searchParams.get("query") ?? "";
 
   const onSubmit = (newValue) => {
-    if (!newValue) {
+    if (!newValue.trim()) {
+      toast.error("Search field is empty");
       return setSearchParams({});
     }
-    // searchParams.set("query", newValue);
 
-    // setSearchParams(searchParams);
     setSearchParams({ query: newValue });
   };
 
@@ -49,7 +48,7 @@ const MoviesPage = () => {
 
   return (
     <div>
-      <Toaster />
+      <Toaster position="top-right" />
       {isLoading && <Loader />}
       {error && <ErrorMessage />}
       {<SearchForm onSubmit={onSubmit} searchValue={searchValue} />}

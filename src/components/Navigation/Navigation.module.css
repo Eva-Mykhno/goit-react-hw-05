@@ -1,0 +1,25 @@
+.link {
+  text-decoration-line: none;
+}
+
+.active {
+  color: rgb(189, 20, 20);
+  font-weight: 600;
+}
+
+.menu {
+  width: 100vw;
+  height: 10vh;
+  border-bottom: 2px solid black;
+  padding: 10px 20px;
+}
+
+.list {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+}
+
+.item {
+  font-size: 32px;
+}

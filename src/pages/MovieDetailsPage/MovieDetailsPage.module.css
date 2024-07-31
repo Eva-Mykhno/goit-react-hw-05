@@ -1,0 +1,82 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+}
+
+.goBack {
+  color: rgb(189, 20, 20);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background-color: rgb(193, 190, 190);
+  border: 1 px solid gray;
+  border-radius: 8px;
+  width: 140px;
+  height: 40px;
+  padding: 10px;
+}
+
+.goBack:hover,
+.goBack:focus {
+  color: rgb(193, 190, 190);
+  background-color: rgb(189, 20, 20);
+}
+
+.button {
+  text-decoration: none;
+  color: rgb(189, 20, 20);
+}
+
+.button:hover,
+.button:focus {
+  color: rgb(193, 190, 190);
+}
+
+.containerMovie {
+  display: flex;
+  gap: 40px;
+  flex-direction: row;
+  border-bottom: 2px solid black;
+  padding: 20px 0;
+}
+
+.img {
+  width: 500px;
+}
+
+.containerInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.listGenres {
+  display: flex;
+  gap: 10px;
+}
+
+.itemGenres {
+  list-style: none;
+}
+
+.info {
+  border-bottom: 2px solid black;
+  padding: 20px 10px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-left: 20px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+}
+
+.waitnig {
+  color: rgb(189, 20, 20);
+}

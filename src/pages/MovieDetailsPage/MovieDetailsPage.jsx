@@ -1,14 +1,11 @@
 import { Suspense, useEffect, useState } from "react";
 import { fetchMovieDetails } from "../../services/api";
-import {
-  Link,
-  NavLink,
-  Outlet,
-  useLocation,
-  useParams,
-} from "react-router-dom";
+import { NavLink, Outlet, useLocation, useParams } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+import { FaArrowLeftLong } from "react-icons/fa6";
+import { BsDot } from "react-icons/bs";
+import s from "./MovieDetailsPage.module.css";
 
 const MovieDetailsPage = () => {
   const [movie, setMovie] = useState(null);
@@ -42,39 +39,55 @@ const MovieDetailsPage = () => {
     "https://dl-media.viber.com/10/share/2/long/vibes/icon/image/0x0/95e0/5688fdffb84ff8bed4240bcf3ec5ac81ce591d9fa9558a3a968c630eaba195e0.jpg";
 
   return (
-    <div>
+    <div className={s.wrapper}>
       {isLoading && <Loader />}
       {error && <ErrorMessage />}
-      <div>
-        <Link to={goBackLink}>Go Back</Link>
+      <div className={s.goBack}>
+        <FaArrowLeftLong />
+        <NavLink className={s.button} to={goBackLink}>
+          Go Back
+        </NavLink>
       </div>
-      <img
-        src={
-          movie.poster_path
-            ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
-            : defaultImg
-        }
-        alt={movie.title}
-      />
-      <h2>{movie.title}</h2>
-      <p>User score: 74%</p>
-      <h3> Overview </h3>
-      <p>{movie.overview}</p>
-      <h3> Genres </h3>
-      <ul>
-        {movie.genres.map((item) => (
-          <li key={item.id}>{item.name}</li>
-        ))}
-      </ul>
 
-      <div>
-        <h4>Additional information</h4>
-        <div>
-          <NavLink to="cast">Cast</NavLink>
-          <NavLink to="reviews">Reviews</NavLink>
+      <div className={s.containerMovie}>
+        <img
+          className={s.img}
+          src={
+            movie.poster_path
+              ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+              : defaultImg
+          }
+          alt={movie.title}
+        />
+        <div className={s.containerInfo}>
+          <h2>{movie.title}</h2>
+          <p>User score: 74%</p>
+          <h3> Overview </h3>
+          <p>{movie.overview}</p>
+          <h3> Genres </h3>
+          <ul className={s.listGenres}>
+            {movie.genres.map((item) => (
+              <li className={s.itemGenres} key={item.id}>
+                {item.name}
+              </li>
+            ))}
+          </ul>
         </div>
       </div>
-      <Suspense fallback={<h3>Waiting...</h3>}>
+      <div className={s.info}>
+        <h4>Additional information</h4>
+        <div className={s.list}>
+          <div className={s.item}>
+            <BsDot />
+            <NavLink to="cast">Cast</NavLink>
+          </div>
+          <div className={s.item}>
+            <BsDot />
+            <NavLink to="reviews">Reviews</NavLink>{" "}
+          </div>
+        </div>
+      </div>
+      <Suspense fallback={<h3 className={s.waitnig}>Waiting...</h3>}>
         <Outlet />
       </Suspense>
     </div>

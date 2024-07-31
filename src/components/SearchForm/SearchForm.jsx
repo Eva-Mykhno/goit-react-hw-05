@@ -1,3 +1,5 @@
+import s from "./SearchForm.module.css";
+
 const SearchForm = ({ onSubmit, searchValue }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -5,15 +7,17 @@ const SearchForm = ({ onSubmit, searchValue }) => {
     onSubmit(value);
   };
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={s.form} onSubmit={handleSubmit}>
       <input
+        className={s.input}
         type="search"
         name="search"
         placeholder="Search movie..."
-        value={searchValue}
-        onChange={(e) => onSubmit(e.target.value)}
+        defaultValue={searchValue}
       />
-      <button type="submit">Search</button>
+      <button className={s.button} type="submit">
+        Search
+      </button>
     </form>
   );
 };

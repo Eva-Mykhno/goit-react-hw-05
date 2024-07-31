@@ -7,15 +7,15 @@ const Navigation = () => {
     return clsx(s.link, isActive && s.active);
   };
   return (
-    <header className={s.header}>
-      <nav>
+    <header>
+      <nav className={s.menu}>
         <ul className={s.list}>
           <li className={s.item}>
             <NavLink className={buildLinkClass} to="/">
               Home
             </NavLink>
           </li>
-          <li>
+          <li className={s.item}>
             <NavLink className={buildLinkClass} to="movies">
               Movies
             </NavLink>

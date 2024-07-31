@@ -3,6 +3,7 @@ import { fetchMovieReviews } from "../../services/api";
 import { useParams } from "react-router-dom";
 import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
+import s from "./MovieReviews.module.css";
 
 const MovieReviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -29,11 +30,11 @@ const MovieReviews = () => {
     <div>
       {isLoading && <Loader />}
       {error && <ErrorMessage />}
-      <ul>
+      <ul className={s.list}>
         {reviews.length ? (
           reviews.map((item) => (
             <li key={item.id}>
-              <p>{item.author}:</p>
+              <p className={s.title}>Author: {item.author}.</p>
               <p>{item.content}</p>
             </li>
           ))

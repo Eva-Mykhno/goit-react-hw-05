@@ -1,10 +1,17 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { FaArrowLeftLong } from "react-icons/fa6";
+import s from "./NotFoundPage.module.css";
 
 const NotFoundPage = () => {
   return (
-    <div>
-      <p>Sorry... The page is not found</p>
-      <Link to="/">Go Home</Link>
+    <div className={s.wrapper}>
+      <p className={s.text}>Sorry... The page is not found</p>
+      <div className={s.goHome}>
+        <FaArrowLeftLong />
+        <NavLink className={s.button} to="/">
+          Go Home
+        </NavLink>
+      </div>
     </div>
   );
 };
